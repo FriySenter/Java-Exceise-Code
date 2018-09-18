@@ -64,7 +64,6 @@ public class main {
 		main m = new main();
 
 		m.getInput();
-//		m.function(m.num1, m.num2);
 		System.out.println(m.result);
 
 	}
