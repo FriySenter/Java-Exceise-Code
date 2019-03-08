@@ -1,0 +1,97 @@
+Group 2
+
+Yudong WU     A20405374
+Bin Sun       A20376746
+Hailong Mao   A20379619
+
+
+1operating steps(in Linux system, suppose gcc is installed)
+  1. Download the source code 
+  2. Open the Linux terminal, use command "cd" to access this folder.
+  3. Input command "make", press Enter to run the
+  4. Input command "./test_assign2", press Enter to test.
+
+
+2the file list
+
+                Makefile
+                README
+		buffer_mgr.h
+                buffer_mgr.c
+		buffer_mgr_stat.c
+		buffer_mgr_stat.h
+		dberror.c
+		dberror.h
+		dt.h
+		storage_mgr.h
+                storage_mgr.c
+		test_assign2_1.c
+		test_helper.h
+
+
+
+
+
+
+The functions be implemented
+
+initBufferPool function create a new buffer pool with numPages using different replacement strategies, the poll is used to cache pages from the page file.
+
+
+shutdownBufferPool function is used to destroy the buffer pool, that is free all resources related with buffer pool.
+
+
+forceFlushPool function causes all dirty pages (with fixNum = 0) from the buffer pool to be written to disk
+
+
+pinpage function pins the page with page number pageNum, means the buffer manager request the pages identified by the position
+
+
+The getFrameContents function returns an array of PageNumbers (of size numPages) where the ith element is the number of the page stored in the ith page frame. An empty page frame is represented using the constant NO_PAGE.
+
+
+
+The getDirtyFlags function returns returns an array of bools (of size numPages) where the ith element is TRUE if the page stored in the ith page frame is dirty.
+
+
+
+The getFixCounts function returns an array of ints (of size numPages) where the ith element is the fix count of the page stored in the ith page frame.
+
+
+The getNumReadIO function returns  the number of pages that have been read from disk since a buffer pool has been initialized. 
+
+
+getNumWriteIO returns the number of pages written to the page file since the buffer pool has been initialized.
+
+
+
+
+3data structure
+
+
+typedef struct bufferFrame{
+    BM_PageHandle *bm_ph; //target data
+    int BF_totalNumber;
+    int BF_currentPageNumber;
+    int BF_fixNum;
+    bool BF_status; //inuse or aviluable?
+    bool BF_dirty; //dirty or not?
+    int BF_FIFO_count; //FIFO parameter
+    int BF_LRU_count; //LRT parameter
+} bufferFrame;
+
+
+typedef struct BM_mgmtData{
+    bufferFrame *BufferPool;
+    SM_FileHandle *fHandle;
+    int bm_read_count;
+    int bm_write_count;
+}BM_mgmtData;
+
+
+
+
+
+
+
+
